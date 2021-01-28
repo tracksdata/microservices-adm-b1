@@ -16,6 +16,16 @@ public class Receiver {
 	public Queue myQueue1() {
 		return new Queue("TestQ1",false);
 	}
+	@Bean
+	public Queue myQueue2() {
+		return new Queue("TestQ2",false);
+	}
+
+	
+	@Bean
+	public Queue myQueue3() {
+		return new Queue("TestQ3",false);
+	}
 	
 	@RabbitListener(queues = "TestQ1")
 	public void processMessage(Map<String, Object> messages) {
