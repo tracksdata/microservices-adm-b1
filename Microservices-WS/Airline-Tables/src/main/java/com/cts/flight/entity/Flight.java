@@ -64,6 +64,22 @@ public class Flight {
 
 
 
+	public AirlineInfo getAirlineInfo() {
+		return airlineInfo;
+	}
+
+
+
+
+
+	public void setAirlineInfo(AirlineInfo airlineInfo) {
+		this.airlineInfo = airlineInfo;
+	}
+
+
+
+
+
 	public int getId() {
 		return id;
 	}

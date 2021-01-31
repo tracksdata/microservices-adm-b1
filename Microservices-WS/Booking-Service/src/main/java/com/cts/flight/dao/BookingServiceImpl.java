@@ -24,19 +24,20 @@ public class BookingServiceImpl {
 	}
 
 	private String findFlightUrl = "http://localhost:8082/api/search";
-	private String fareUrl = "http://localhost:8081/api/fare";
+	private String fareUrl = "http://localhost:8081/api/fare/";
 
 	public void bookFlight( int id, int numberofPassenger) {
+		System.out.println(">>> ID:   "+id);
 
 		Fare fare = null;
 		Flight flight = null;
 		System.out.println(">>>>>>>>");
 		try {
 			fare = restTemplate.getForObject(fareUrl + "/" + id, Fare.class);
-			flight = restTemplate.getForObject(findFlightUrl + "/" + id, Flight.class);
+			//flight = restTemplate.getForObject(findFlightUrl + "/" + id, Flight.class);
 
 			System.out.println("Fare is " + fare.getFare());
-			System.out.println("Flight: " + flight.getFlightNumber());
+			//System.out.println("Flight: " + flight.getFlightNumber());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
