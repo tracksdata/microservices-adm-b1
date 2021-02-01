@@ -26,9 +26,7 @@ public class Flight {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fareId")
 	private Fare fare;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "invId")
-	private Inventory inventory;
+	
 
 	public int getId() {
 		return id;
@@ -94,12 +92,6 @@ public class Flight {
 		this.fare = fare;
 	}
 
-	public Inventory getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
+	
 
 }

@@ -25,7 +25,9 @@ public class SearchServiceImpl implements SearchService {
 		if (flight != null) {
 			Inventory inv = flight.getInventory();
 			inv.setCount(inv.getCount() - newInventory);
+			flight.setInventory(inv);
 			flightDao.save(flight);
+			
 		} else {
 			throw new RuntimeException(">>>>> Error Occured <<<<<<");
 		}

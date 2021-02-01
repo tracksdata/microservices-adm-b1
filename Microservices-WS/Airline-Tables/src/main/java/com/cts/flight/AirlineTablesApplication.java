@@ -125,7 +125,7 @@ public class AirlineTablesApplication {
 		a7.getFlights().add(f27);
 		a7.getFlights().add(f28);
 
-		// airlineDao.saveAll(airlines);
+		// airlineDao.saveAll(airlines); // never enable it. coz flight itself saves all other cascading entities.
 
 		flights.add(new Flight(f1.getFlightNumber(), "DELHI", "CHENNAI", "2 hrs 15 mins", LocalDate.of(2021, 2, 26),
 				LocalTime.of(2, 12), new Fare(4800, "INR"), new Inventory(100), a1));
@@ -171,7 +171,8 @@ public class AirlineTablesApplication {
 				LocalTime.of(6, 15), new Fare(3000, "INR"), new Inventory(100), a6));
 		flights.add(new Flight(f23.getFlightNumber(), "DELHI", "CHENNAI", "1 hrs 55 mins", LocalDate.of(2021, 2, 26),
 				LocalTime.of(22, 45), new Fare(9000, "INR"), new Inventory(100), a6));
-		flightRepository.saveAll(flights);
+		
+		//flightRepository.saveAll(flights);
 
 		Passenger p1 = new Passenger("Praveen", "Reddy", "praveen@abc.com", "Male", 9776565434L);
 		Passenger p2 = new Passenger("Geetha", "Kumari", "geet@abc.com", "Female", 9876565432L);
@@ -205,13 +206,13 @@ public class AirlineTablesApplication {
 		CheckIn chk2=new CheckIn(LocalDateTime.now(), "A3", b2);
 		CheckIn chk3=new CheckIn(LocalDateTime.now(), "B2", b3);
 
-		bookingRecord.save(b1);
-		bookingRecord.save(b2);
-		bookingRecord.save(b3);
+	//	bookingRecord.save(b1);
+	//	bookingRecord.save(b2);
+	//	bookingRecord.save(b3);
 
-		checkinDao.save(chk1);
-		checkinDao.save(chk2);
-		checkinDao.save(chk3);
+	//	checkinDao.save(chk1);
+	//	checkinDao.save(chk2);
+	//	checkinDao.save(chk3);
 
 		
 		

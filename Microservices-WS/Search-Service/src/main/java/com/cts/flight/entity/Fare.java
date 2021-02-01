@@ -6,7 +6,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Fare {
-
 	@Id
 	@GeneratedValue
 	private int fareId;

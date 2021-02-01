@@ -25,10 +25,17 @@ public class Receiver {
 	// Listener
 	@RabbitListener(queues = "InventoryQ")
 	public void processMessage(Map<String, Object> inventory) {
-
 		System.out.println(">>>>>>>>>>>>>>>>>>>>> UPDATING NEW INVENTORY <<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println("----------------------------------------");
+		System.out.println(inventory.get("FLIGHT_NUMBER"));
+		System.out.println( (LocalDate) inventory.get("FLIGHTDATE"));
+		System.out.println((int) inventory.get("NEW_INVENTORY"));
+		System.out.println("----------------------------------------");
+
 		searchService.updateInventory((String) inventory.get("FLIGHT_NUMBER"), (LocalDate) inventory.get("FLIGHTDATE"),
 				(int) inventory.get("NEW_INVENTORY"));
+		
+		
 		System.out.println(">>>>>>>>>>>>>> UPDATED <<<<<<<<<<<<<<<<<<<");
 
 	}

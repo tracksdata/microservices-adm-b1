@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class BookingRecord {
@@ -23,13 +27,21 @@ public class BookingRecord {
 	private double fare;
 	private String status;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "passengerId")
+	private Passenger passenger;
+
+	@OneToOne
+	@JoinColumn(name = "airlineId")
+	private AirlineInfo airlineInfo;
+
 	public BookingRecord() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public BookingRecord(LocalDate flightDate, LocalTime flightTime, LocalDateTime bookingDate, String flightNumber,
-			String origin, String destination, double fare, String status) {
-		super();
+			String origin, String destination, double fare, Passenger passenger, AirlineInfo airlineInfo,
+			String status) {
 		this.flightDate = flightDate;
 		this.flightTime = flightTime;
 		this.bookingDate = bookingDate;
@@ -38,6 +50,24 @@ public class BookingRecord {
 		this.destination = destination;
 		this.fare = fare;
 		this.status = status;
+		this.passenger = passenger;
+		this.airlineInfo = airlineInfo;
+	}
+
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+	}
+
+	public AirlineInfo getAirlineInfo() {
+		return airlineInfo;
+	}
+
+	public void setAirlineInfo(AirlineInfo airlineInfo) {
+		this.airlineInfo = airlineInfo;
 	}
 
 	public int getBookingId() {

@@ -23,14 +23,22 @@ public class Passenger {
 	private String gender;
 	private long mobileNumber;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "bookingId")
-	private BookingRecord bookingRecord;
-
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "copassengerId", joinColumns = { @JoinColumn(name = "passengerId") }, inverseJoinColumns = {
+	@JoinTable(name = "copassengers", joinColumns = { @JoinColumn(name = "passengerId") }, inverseJoinColumns = {
 			@JoinColumn(name = "copassengerId") })
-	private List<CoPassenger> coPassengers = new ArrayList<>();
+	private List<CoPassenger> copassengers = new ArrayList<>();
+
+	public Passenger() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Passenger(String firstName, String lastName, String emailAddress, String gender, long mobileNumber) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.gender = gender;
+		this.mobileNumber = mobileNumber;
+	}
 
 	public int getPassengerId() {
 		return passengerId;
@@ -80,20 +88,14 @@ public class Passenger {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public BookingRecord getBookingRecord() {
-		return bookingRecord;
+	
+
+	public List<CoPassenger> getCopassengers() {
+		return copassengers;
 	}
 
-	public void setBookingRecord(BookingRecord bookingRecord) {
-		this.bookingRecord = bookingRecord;
-	}
-
-	public List<CoPassenger> getCoPassengers() {
-		return coPassengers;
-	}
-
-	public void setCoPassengers(List<CoPassenger> coPassengers) {
-		this.coPassengers = coPassengers;
+	public void setCopassengers(List<CoPassenger> copassengers) {
+		this.copassengers = copassengers;
 	}
 
 }
