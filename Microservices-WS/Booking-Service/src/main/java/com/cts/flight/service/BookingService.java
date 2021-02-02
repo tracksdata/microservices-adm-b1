@@ -1,4 +1,4 @@
-package com.cts.flight.dao;
+package com.cts.flight.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import com.cts.flight.entity.BookingRecord;
 import com.cts.flight.entity.Passenger;
 
-public interface BookingRecordService {
+public interface BookingService {
 
 	RestTemplate testRemplate();
 

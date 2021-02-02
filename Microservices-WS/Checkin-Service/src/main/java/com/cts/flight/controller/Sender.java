@@ -8,30 +8,21 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class Sender {
+	
+	RabbitMessagingTemplate template;
 
 	@Autowired
-	private RabbitMessagingTemplate template;
-
-	@Bean
-	public Queue queue1() {
-		return new Queue("InventoryQ", false);
+	Sender(RabbitMessagingTemplate template) {
+		this.template = template;
 	}
 
 	@Bean
-	public Queue queue2() {
+	Queue queue() {
 		return new Queue("CheckinQ", false);
 	}
 
-	@Bean
-	Queue queue3() {
-		return new Queue("EmailQ", false);
+	public void send(Object bookingId) {
+		template.convertAndSend("CheckinQ", bookingId);
 	}
-	public void sendInventoryData(Object map) {
-		template.convertAndSend("InventoryQ", map);
-	}
-	public void sendEmail(Object bookingObj) {
-		template.convertAndSend("EmailQ",bookingObj);
-	}
-
 
 }

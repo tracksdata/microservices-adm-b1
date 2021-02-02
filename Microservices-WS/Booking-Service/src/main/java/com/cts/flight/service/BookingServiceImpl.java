@@ -1,4 +1,4 @@
-package com.cts.flight.dao;
+package com.cts.flight.service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cts.flight.controller.Sender;
+import com.cts.flight.dao.BookingRecordDao;
 import com.cts.flight.entity.BookingRecord;
 import com.cts.flight.entity.Fare;
 import com.cts.flight.entity.Flight;
 import com.cts.flight.entity.Passenger;
 
 @Service
-public class BookingServiceImpl implements BookingRecordService {
+public class BookingServiceImpl implements  BookingService {
 
 	@Autowired
 	private BookingRecordDao bookingRecordDao;
@@ -68,11 +69,26 @@ public class BookingServiceImpl implements BookingRecordService {
 		// SEND Booking Info to Search Microservice via RabbitMQ to update into DB
 
 		Map<String, Object> bookingDetails = new HashMap<String, Object>();
+		
+		
 		bookingDetails.put("FLIGHT_NUMBER", flight.getFlightNumber());
 		bookingDetails.put("FLIGHTDATE", flight.getFlightDate());
 		bookingDetails.put("NEW_INVENTORY", numberofPassenger);
 
 		sender.sendInventoryData(bookingDetails);
+		
+		
+		// Send Bookin Confirmation email to Email-Service app....
+		
+		Map<String, Object> emailDetails = new HashMap<String, Object>();
+		emailDetails.put("NAME", passenger.getFirstName());
+		emailDetails.put("FLIGHT_NUMBER", bookingRecord.getFlightNumber());
+		emailDetails.put("ORIGIN", bookingRecord.getOrigin());
+		emailDetails.put("DESTINATION", bookingRecord.getDestination());
+		emailDetails.put("DATE", bookingRecord.getFlightDate());
+		emailDetails.put("TIME", bookingRecord.getFlightTime());
+		
+		sender.sendEmail(emailDetails);
 
 		return bookingRecord;
 

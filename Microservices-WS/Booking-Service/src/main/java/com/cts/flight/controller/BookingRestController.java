@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.flight.dao.BookingRecordService;
 import com.cts.flight.entity.BookingRecord;
 import com.cts.flight.entity.Passenger;
+import com.cts.flight.service.BookingService;
 
 @RestController
 @CrossOrigin
@@ -19,7 +19,7 @@ import com.cts.flight.entity.Passenger;
 public class BookingRestController {
 
 	@Autowired
-	private BookingRecordService bs;
+	private BookingService bs;
 
 	@PostMapping("/{id}/{numberofPassengers}")
 	public BookingRecord test(@RequestBody Passenger passenger, @PathVariable("id") int id,
