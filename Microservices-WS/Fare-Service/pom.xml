@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cts</groupId>
-	<artifactId>Fare-Service</artifactId>
+	<artifactId>Search-Service</artifactId>
 	<version>1</version>
-	<name>Fare-Service</name>
+	<name>Search-Service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -20,6 +20,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,6 +48,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
