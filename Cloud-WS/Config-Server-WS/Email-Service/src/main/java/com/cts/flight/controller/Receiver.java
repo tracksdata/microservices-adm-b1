@@ -37,15 +37,18 @@ public class Receiver {
 
         String flightNumber=(String)bookingDetails.get("FLIGHT_NUMBER");
         LocalDate flightDate=(LocalDate)bookingDetails.get("DATE");
-        String passengerName=(String)bookingDetails.get("NAME");
+        String firstName=(String)bookingDetails.get("FIRST_NAME");
+        String lastName=(String)bookingDetails.get("LAST_NAME");
         LocalTime time=(LocalTime)bookingDetails.get("TIME");
         String origin=(String)bookingDetails.get("ORIGIN");
         String destination=(String)bookingDetails.get("DESTINATION");
+        int bookingId=(int)bookingDetails.get("BOOKING_ID");
+
 
         
         
-        msg.setSubject("Flight Booking Confirmation");
-        msg.setText("Dear "+passengerName+" You Flight Number "+flightNumber+" is confirmed on "+flightDate +" at "+time +" from "+origin+" to  "+destination);
+        msg.setSubject("Booking Conformation on Booking ID "+bookingId);
+        msg.setText("Dear "+firstName+" "+lastName+", You Flight Number "+flightNumber+" is confirmed on "+flightDate +" at "+time +" from "+origin+" to  "+destination+". You booking id is "+bookingId);
 
         javaMailSender.send(msg);
         

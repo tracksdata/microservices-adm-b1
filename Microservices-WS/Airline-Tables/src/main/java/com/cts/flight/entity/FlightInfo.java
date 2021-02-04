@@ -1,8 +1,11 @@
 package com.cts.flight.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FlightInfo {
@@ -14,18 +17,33 @@ public class FlightInfo {
 	private String flightType;
 	private int seatCapacity;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="airlineId")
+	private AirlineInfo airlineInfo;
+	
 	public FlightInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public FlightInfo(String flightNumber, String flightType, int seatCapacity) {
+	public FlightInfo(String flightNumber, String flightType, int seatCapacity,AirlineInfo airlineInfo) {
 		super();
 		this.flightNumber = flightNumber;
 		this.flightType = flightType;
 		this.seatCapacity = seatCapacity;
+		this.airlineInfo=airlineInfo;
 	}
 
+
+
+	public AirlineInfo getAirlineInfo() {
+		return airlineInfo;
+	}
+
+
+	public void setAirlineInfo(AirlineInfo airlineInfo) {
+		this.airlineInfo = airlineInfo;
+	}
 
 
 	public int getFlightInfoid() {

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class BookingRecord {
@@ -30,16 +31,17 @@ public class BookingRecord {
 	@JoinColumn(name="passengerId")
 	private Passenger passenger;
 
+	
 	@OneToOne
-	@JoinColumn(name="airlineId")
-	private AirlineInfo airlineInfo;
+	@JoinColumn(name="flightInfoid")
+	private FlightInfo flightInfo;
 	
 	public BookingRecord() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public BookingRecord(LocalDate flightDate, LocalTime flightTime, LocalDateTime bookingDate, String flightNumber,
-			String origin, String destination, double fare,Passenger passenger,AirlineInfo airlineInfo,String status) {
+			String origin, String destination, double fare,Passenger passenger,String status,FlightInfo flightInfo) {
 		this.flightDate = flightDate;
 		this.flightTime = flightTime;
 		this.bookingDate = bookingDate;
@@ -49,7 +51,7 @@ public class BookingRecord {
 		this.fare = fare;
 		this.status = status;
 		this.passenger=passenger;
-		this.airlineInfo=airlineInfo;
+		this.flightInfo=flightInfo;
 	}
 
 	public int getBookingId() {

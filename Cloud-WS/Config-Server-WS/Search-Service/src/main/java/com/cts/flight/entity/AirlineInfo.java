@@ -1,15 +1,8 @@
 package com.cts.flight.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 
 @Entity
 public class AirlineInfo {
@@ -20,9 +13,7 @@ public class AirlineInfo {
 	private String airlineName;
 	private String airlineLogo;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "flightsInformation",joinColumns = {@JoinColumn(name="airlineId")},inverseJoinColumns = {@JoinColumn(name="flightInfoid")})
-	private List<FlightInfo> flights = new ArrayList<>();
+	
 
 	public AirlineInfo() {
 		// TODO Auto-generated constructor stub
@@ -35,13 +26,6 @@ public class AirlineInfo {
 
 	
 	
-	public List<FlightInfo> getFlights() {
-		return flights;
-	}
-
-	public void setFlights(List<FlightInfo> flights) {
-		this.flights = flights;
-	}
 
 	public int getAirlineId() {
 		return airlineId;

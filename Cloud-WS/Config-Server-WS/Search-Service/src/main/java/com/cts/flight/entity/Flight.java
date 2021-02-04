@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Flight {
@@ -28,26 +29,21 @@ public class Flight {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fareId")
 	private Fare fare;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "invId")
 	private Inventory inventory;
 	
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="airlineId")
-	private AirlineInfo airlineInfo;
-	
+	@OneToOne
+	@JoinColumn(name="flightInfoid")
+	private FlightInfo flightInfo;
 	
 	public Flight() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	
-
 	public Flight(String flightNumber, String origin, String destination, String duration, LocalDate flightDate,
-			LocalTime flightTime, Fare fare, Inventory inventory, AirlineInfo airlineInfo) {
+			LocalTime flightTime, Fare fare, Inventory inventory, FlightInfo flightInfo) {
 		super();
 		this.flightNumber = flightNumber;
 		this.origin = origin;
@@ -57,12 +53,20 @@ public class Flight {
 		this.flightTime = flightTime;
 		this.fare = fare;
 		this.inventory = inventory;
-		this.airlineInfo = airlineInfo;
+		this.flightInfo = flightInfo;
 	}
 
 
 
 
+
+	public FlightInfo getFlightInfo() {
+		return flightInfo;
+	}
+
+	public void setFlightInfo(FlightInfo flightInfo) {
+		this.flightInfo = flightInfo;
+	}
 
 	public int getId() {
 		return id;

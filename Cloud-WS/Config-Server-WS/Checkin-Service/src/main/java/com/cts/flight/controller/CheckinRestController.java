@@ -1,6 +1,8 @@
 package com.cts.flight.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,16 @@ public class CheckinRestController {
 	private CheckinService checkinService;
 	
 	@PostMapping("/{bookingId}")
-	public CheckIn checkIn(@PathVariable("bookingId")int bookingId) {
-		return  checkinService.checkIn(bookingId);
+	public ResponseEntity<Object> checkIn(@PathVariable("bookingId")int bookingId) {
+		
+		CheckIn checkInInfo = checkinService.getCheckInInfo(bookingId);
+		
+		if(checkInInfo!=null && checkInInfo.getBookingRecord().getBookingId()==bookingId) {
+			
+			return new ResponseEntity<Object>("Booking Id "+bookingId+" is already checkedIn. Cannot Checkin again. Checkin id is "+checkInInfo.getCheckinId(),HttpStatus.OK);
+		}
+		
+		return  new ResponseEntity<Object>(checkinService.checkIn(bookingId),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{bookingId}")
